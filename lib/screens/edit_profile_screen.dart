@@ -1,40 +1,59 @@
 import 'package:flutter/material.dart';
 
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({super.key});
+class EditProfileScreen extends StatefulWidget {
+  const EditProfileScreen({Key? key}) : super(key: key);
 
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  State<EditProfileScreen> createState() => _EditProfileScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _EditProfileScreenState extends State<EditProfileScreen> {
   final _formKey = GlobalKey<FormState>();
+  final TextEditingController _nameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
-  final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _phoneController = TextEditingController();
 
-  void _login() {
+  void _saveProfile() {
     if (_formKey.currentState!.validate()) {
-      Navigator.pushReplacementNamed(context, '/home');
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Profil berhasil diperbarui!')),
+      );
+      // Tambahkan logika untuk menyimpan perubahan profil di sini
     }
-  }
-
-  void _navigateToForgotPassword() {
-    Navigator.pushNamed(context, '/forgot-password');
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Login Screen'),
+        title: const Text('Edit Profil'),
+        backgroundColor: const Color.fromARGB(255, 84, 157, 103),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Form(
           key: _formKey,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
+          child: ListView(
             children: [
+              const Text(
+                'Perbarui informasi profil Anda.',
+                style: TextStyle(fontSize: 16),
+              ),
+              const SizedBox(height: 24),
+              TextFormField(
+                controller: _nameController,
+                decoration: const InputDecoration(
+                  labelText: 'Nama',
+                  border: OutlineInputBorder(),
+                ),
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Nama tidak boleh kosong';
+                  }
+                  return null;
+                },
+              ),
+              const SizedBox(height: 16),
               TextFormField(
                 controller: _emailController,
                 decoration: const InputDecoration(
@@ -53,64 +72,37 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
               const SizedBox(height: 16),
               TextFormField(
-                controller: _passwordController,
-                obscureText: true,
+                controller: _phoneController,
                 decoration: const InputDecoration(
-                  labelText: 'Password',
+                  labelText: 'Nomor Telepon',
                   border: OutlineInputBorder(),
                 ),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
-                    return 'Password tidak boleh kosong';
+                    return 'Nomor telepon tidak boleh kosong';
+                  }
+                  if (!RegExp(r'^\d+$').hasMatch(value)) {
+                    return 'Nomor telepon hanya boleh berisi angka';
                   }
                   return null;
                 },
               ),
-              const SizedBox(height: 16),
-              Align(
-                alignment: Alignment.centerRight,
-                child: TextButton(
-                  onPressed: () {
-                    Navigator.pushNamed(context, '/forgot');
-                  },
-                  child: const Text(
-                    'Lupa Password?',
-                    style: TextStyle(
-                      color: Color.fromARGB(255, 138, 206, 128),
-                      fontSize: 14,
-                    ),
-                  ),
-                ),
-              ),
-              const SizedBox(height: 16),
+              const SizedBox(height: 24),
               ElevatedButton(
-                onPressed: _login,
+                onPressed: _saveProfile,
                 style: ElevatedButton.styleFrom(
                   minimumSize: const Size(double.infinity, 50),
                   backgroundColor: const Color.fromARGB(255, 84, 157, 103),
-                  foregroundColor: const Color.fromARGB(255, 255, 255, 255),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(8),
                   ),
                 ),
                 child: const Text(
-                  'Login',
+                  'Simpan Perubahan',
                   style: TextStyle(
                     fontSize: 18,
+                    color: Colors.white,
                     fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ),
-              const SizedBox(height: 16),
-              TextButton(
-                onPressed: () {
-                  Navigator.pushNamed(context, '/register');
-                },
-                child: const Text(
-                  'Belum punya akun? Daftar',
-                  style: TextStyle(
-                    color: Color.fromARGB(255, 138, 206, 128),
-                    fontSize: 16,
                   ),
                 ),
               ),

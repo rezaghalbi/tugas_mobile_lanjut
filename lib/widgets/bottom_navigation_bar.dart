@@ -28,7 +28,7 @@ class BottomNavigationBarWidget extends StatelessWidget {
         ),
       ],
       currentIndex: selectedIndex,
-      selectedItemColor: Colors.blue,
+      selectedItemColor: const Color.fromARGB(255, 84, 157, 103),
       onTap: onItemTapped,
     );
   }

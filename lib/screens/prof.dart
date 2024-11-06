@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class SplashScreen extends StatefulWidget {
-  const SplashScreen({Key? key}) : super(key: key);
+  const SplashScreen({super.key});
 
   @override
   State<SplashScreen> createState() => _SplashScreenState();
@@ -13,14 +13,16 @@ class _SplashScreenState extends State<SplashScreen> {
     super.initState();
     // Navigate to your main screen after 3 seconds
     Future.delayed(const Duration(seconds: 3), () {
-      Navigator.pushReplacementNamed(context, '/home'); // Replace with your route
+      Navigator.pushReplacementNamed(
+          context, '/home'); // Replace with your route
     });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white, // Customize your background color
+      backgroundColor: const Color.fromARGB(
+          255, 84, 157, 103), // Customize your background color
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,

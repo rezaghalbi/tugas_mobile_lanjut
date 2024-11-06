@@ -37,7 +37,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Profile Screen'),
-        backgroundColor: Colors.blueGrey,
+        backgroundColor: const Color.fromARGB(255, 84, 157, 103),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -70,10 +70,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     ListTile(
-                      title: Text('Name: Eko Kurniawan'),
+                      title: Text('Name: fahreza ghalbi'),
                     ),
                     ListTile(
-                      title: Text('Email: roger@gmail.com'),
+                      title: Text('Email: 5210411297@gmail'),
                     ),
                     ListTile(
                       title: Text('Address: Yogyakarta'),
@@ -85,7 +85,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
             const SizedBox(height: 20),
             Center(
               child: ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.pushNamed(context, '/edit');
+                },
                 child: const Text('Edit Profile'),
               ),
             ),
